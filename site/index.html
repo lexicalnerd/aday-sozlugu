@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>aday sözlüğü</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="sayfa">
+        <a href="#sozluk" data-i18n="nav.dictionary">sözlük</a>
+        <a href="#kimlik" data-i18n="nav.identity">kimlik</a>
+        <a href="#kume" data-i18n="nav.clusters">kümeler</a>
+        <a href="#veri" data-i18n="nav.data">veri</a>
+        <a href="#yontem" data-i18n="nav.method">yöntem</a>
+        <div class="language-toggle" aria-label="language">
+          <button class="active" type="button" data-lang="tr">tr</button>
+          <button type="button" data-lang="en">en</button>
+        </div>
+      </nav>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <img class="hero-icon" src="./assets/open-book.png" alt="" aria-hidden="true" />
+          <p class="kicker" data-i18n="hero.kicker">türkçe siyasi söylem analizi</p>
+          <h1 data-i18n="hero.title">aday sözlüğü</h1>
+        </div>
+        <div class="hero-graphic" aria-label="aday kelime ağı">
+          <div class="graphic-head">
+            <span data-i18n="hero.network">kelime ağı</span>
+            <div class="legend">
+              <span><i class="erdogan-dot"></i>erdoğan</span>
+              <span><i class="ogan-dot"></i>oğan</span>
+              <span><i class="kilicdaroglu-dot"></i>kılıçdaroğlu</span>
+            </div>
+          </div>
+          <div class="word-orbit" id="heroOrbit"></div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section intro" id="sozluk">
+        <div>
+          <p class="eyebrow" data-i18n="corpus.eyebrow">corpus</p>
+          <h2 data-i18n="corpus.title">önce aynı ölçekte okuyalım.</h2>
+        </div>
+        <p data-i18n="corpus.body">
+          her aday için sadece hedef konuşmacı blokları analiz edildi. moderatör, gazeteci ve
+          soru metinleri dışarıda bırakıldı; oranlar farklı metin hacimlerini karşılaştırmak için
+          1.000 temiz token başına hesaplandı.
+        </p>
+      </section>
+
+      <section class="act-card">
+        <img src="./assets/group.png" alt="" aria-hidden="true" />
+        <p data-i18n="act.label">act i</p>
+        <h2 data-i18n="act.title">kelimeler, kimlikler, kümeler</h2>
+        <ul>
+          <li data-i18n="act.one">hangi kelimeler adaylara yapışıyor?</li>
+          <li data-i18n="act.two">“biz” ve “ben” ne kadar merkezde?</li>
+          <li data-i18n="act.three">bir çapa kelimeden sonra hangi ifadeler geliyor?</li>
+        </ul>
+      </section>
+
+      <section class="findings" id="bulgular">
+        <p class="eyebrow" data-i18n="findings.eyebrow">bulgular</p>
+        <h2 data-i18n="findings.title">bu veri ne söylüyor?</h2>
+        <div class="finding-grid">
+          <article style="--candidate-color: #f6b21a">
+            <h3 data-i18n="findings.erdogan.title">erdoğan: kolektif ve karşıtlık kuran dil</h3>
+            <p data-i18n="findings.erdogan.body">erdoğan’da “biz” oranı yüksek, “terör” ve “bay kemal / bay bay” gibi karşıtlık kuran ifadeler öne çıkıyor. bu dil, seçmeni ortak bir “biz” içinde toplarken rakibi isimlendiren ve çatışma hattı kuran bir retoriğe yaslanıyor.</p>
+          </article>
+          <article style="--candidate-color: #2f80d8">
+            <h3 data-i18n="findings.ogan.title">oğan: milliyetçi ve aday-merkezli dil</h3>
+            <p data-i18n="findings.ogan.body">oğan’da “türk” açık ara en ayırt edici kimlik terimi. aynı zamanda “ben” oranı en yüksek aday; “sinan oğan”, “türk milliyetçisi”, “ata ittifakı” gibi ifadeler söylemi hem kişisel pozisyona hem de milliyetçi kimliğe bağlıyor.</p>
+          </article>
+          <article style="--candidate-color: #e30613">
+            <h3 data-i18n="findings.kilicdaroglu.title">kılıçdaroğlu: kurumlar, parti ve açıklama dili</h3>
+            <p data-i18n="findings.kilicdaroglu.body">kılıçdaroğlu’nda “parti”, “genel başkan”, “cumhuriyet halk / halk partisi” ve “ifade edeyim” gibi kalıplar daha görünür. “biz” güçlü kalsa da dil, hareket ve kurum üzerinden açıklama yapmaya daha yakın duruyor.</p>
+          </article>
+        </div>
+        <p class="finding-note" data-i18n="findings.note">not: bu sonuçlar mevcut transcript örneklerine dayanır; corpus büyüdükçe oranlar ve öne çıkan kümeler değişebilir.</p>
+      </section>
+
+      <section class="metrics" id="metricCards"></section>
+      <section class="section-insight">
+        <h3 data-i18n="corpus.insight.title">corpus dengesi bulguları sınırlar.</h3>
+        <p data-i18n="corpus.insight.body">oğan ve kılıçdaroğlu için hedef konuşma bloğu sayısı erdoğan’dan daha yüksek. bu yüzden yorumlarda ham sayılardan çok 1.000 token başına oranlara ve tekrarlayan ifade kalıplarına bakmak gerekir.</p>
+      </section>
+
+      <section class="story-block">
+        <div class="sticky-copy">
+          <p class="eyebrow" data-i18n="frequency.eyebrow">sıklık</p>
+          <h2 data-i18n="frequency.title">kimin sözlüğünde hangi kelime öne çıkıyor?</h2>
+          <p data-i18n="frequency.body">
+            aday seçerek en sık geçen kelimelerin dağılımını inceleyin. işlev kelimeleri ve
+            sayı tokenları çıkarıldı; zamirler özellikle korunuyor.
+          </p>
+          <div class="segmented" id="candidateTabs" role="tablist" aria-label="aday seçimi"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <span id="wordsTitle">en sık kelimeler</span>
+            <span class="muted" data-i18n="frequency.limit">ilk 24 kelime</span>
+          </div>
+          <div class="word-field" id="wordField"></div>
+        </div>
+      </section>
+      <section class="section-insight">
+        <h3 data-i18n="frequency.insight.title">sıklıklar üç farklı odak gösteriyor.</h3>
+        <p data-i18n="frequency.insight.body">erdoğan’ın listesinde “biz”, “bizim”, “türkiye”, “terör” ve “bay” birlik ve karşıtlık eksenini kuruyor. oğan’da “ben”, “türk”, “sayın”, “türkiye” ve “ittifakı” adayın kendisini milliyetçi pazarlık alanına yerleştiriyor. kılıçdaroğlu’nda “biz”, “parti”, “lazım”, “zaman” ve “genel” daha açıklayıcı ve örgütsel bir tona işaret ediyor.</p>
+      </section>
+
+      <section class="section" id="kimlik">
+        <div>
+          <p class="eyebrow" data-i18n="identity.eyebrow">kimlik dili</p>
+          <h2 data-i18n="identity.title">“biz”, “ben”, “türkiye” ve diğer işaretler.</h2>
+        </div>
+        <p data-i18n="identity.body">
+          bu bölüm seçili terimlerde adayların 1.000 token başına kullanımını gösterir. mutlak
+          sayılar yerine oranlara bakmak küçük ve büyük corpus farklarını dengeler.
+        </p>
+      </section>
+
+      <section class="identity-tool">
+        <div class="toolbar" id="identityButtons"></div>
+        <div class="identity-chart" id="identityChart"></div>
+      </section>
+      <section class="section-insight">
+        <h3 data-i18n="identity.insight.title">zamirler ideolojik pozisyonu değil, hitap biçimini gösteriyor.</h3>
+        <p data-i18n="identity.insight.body">“biz” erdoğan ve kılıçdaroğlu’nda en güçlü kolektif işaretlerden biri. oğan ise “ben” ve “türk” oranlarında ayrışıyor; bu, söylemin hem kişisel konuma hem de milliyetçi kimliğe daha fazla yaslandığını düşündürüyor. “terör” erdoğan ve kılıçdaroğlu’nda görünürken oğan’da daha düşük kalıyor.</p>
+      </section>
+
+      <section class="story-block cluster-story" id="kume">
+        <div class="sticky-copy">
+          <p class="eyebrow" data-i18n="clusters.eyebrow">kelime kümeleri</p>
+          <h2 data-i18n="clusters.title">bir kelimenin hemen ardından ne geliyor?</h2>
+          <p data-i18n="clusters.body">
+            “biz x”, “ben x”, “türkiye x”, “millet x” gibi yakın takip örüntüleri,
+            söylemin özne kurma biçimini daha görünür hale getirir.
+          </p>
+          <label class="select-label" for="anchorSelect" data-i18n="clusters.anchor">çapa kelime</label>
+          <select id="anchorSelect"></select>
+        </div>
+        <div class="panel cluster-panel">
+          <div class="panel-head">
+            <span id="clusterTitle">küme gezgini</span>
+            <span class="muted" data-i18n="clusters.byColor">aday rengine göre</span>
+          </div>
+          <div class="cluster-grid" id="clusterGrid"></div>
+        </div>
+      </section>
+      <section class="section-insight">
+        <h3 data-i18n="clusters.insight.title">kümeler tek kelimeden daha açıklayıcı.</h3>
+        <p data-i18n="clusters.insight.body">“biz yaptık / biz varız” erdoğan’da icraat ve varlık iddiası kuruyor. oğan’ın “ben türk” ve “türk milliyetçisi” çevresi kimlik ilanı gibi çalışıyor. kılıçdaroğlu’nda “ben adayım”, “biz üretmiyoruz” ve “biz yönetiyoruz” türü kümeler eleştiri ile yönetme iddiasını yan yana getiriyor.</p>
+      </section>
+
+      <section class="phrases">
+        <div>
+          <p class="eyebrow" data-i18n="phrases.eyebrow">ifadeler</p>
+          <h2 data-i18n="phrases.title">en sık iki ve üçlü ifadeler</h2>
+          <p class="phrase-note" data-i18n="phrases.note">* “bay bay” ifadesi “bye-bye” ses oyunuyla kullanılıyor.</p>
+        </div>
+        <div class="phrase-columns" id="phraseColumns"></div>
+      </section>
+      <section class="section-insight">
+        <h3 data-i18n="phrases.insight.title">kalıp ifadeler siyasal rolü görünür kılıyor.</h3>
+        <p data-i18n="phrases.insight.body">erdoğan’ın kalıplarında rakip isimlendirme ve sloganlaşma belirgin. oğan’ın kalıpları aday adları, ittifaklar ve milliyetçi kimlik etrafında yoğunlaşıyor. kılıçdaroğlu’nun kalıpları parti kurumu, açıklama dili ve politika kapasitesi etrafında toplanıyor.</p>
+      </section>
+
+      <section class="conclusion">
+        <p class="eyebrow" data-i18n="conclusion.eyebrow">sonuç</p>
+        <h2 data-i18n="conclusion.title">aynı seçim, üç farklı özne kurma biçimi.</h2>
+        <p data-i18n="conclusion.body">bu örneklemde erdoğan söylemi ortak “biz” ve karşıtlık çizgisiyle, oğan söylemi milliyetçi kimlik ve kişisel adaylık konumuyla, kılıçdaroğlu söylemi ise kurum, parti ve açıklama diliyle öne çıkıyor. bu farklar tek başına ideoloji kanıtı değil; ancak politik hizalanmanın konuşma içinde hangi özne, hangi rakip ve hangi kolektif etrafında kurulduğunu gösteren izler sunuyor.</p>
+      </section>
+
+      <section class="raw-data" id="veri">
+        <p class="eyebrow" data-i18n="raw.eyebrow">ham veri</p>
+        <h2 data-i18n="raw.title">transcript dosyaları</h2>
+        <p data-i18n="raw.body">analizde kullanılan ham transcript dosyaları aşağıda. site kopyaları doğrudan açılabilir; yöntem kısmında anlatıldığı gibi analiz yalnızca hedef aday bloklarını kullanır.</p>
+        <div class="raw-data-grid">
+          <article style="--candidate-color: #f6b21a">
+            <h3>erdoğan</h3>
+            <a href="./raw-data/erdogan/erdogan_1.txt">erdogan_1.txt</a>
+            <a href="./raw-data/erdogan/erdogan_2.txt">erdogan_2.txt</a>
+            <a href="./raw-data/erdogan/erdogan_3.txt">erdogan_3.txt</a>
+            <a href="./raw-data/erdogan/erdogan_4.txt">erdogan_4.txt</a>
+          </article>
+          <article style="--candidate-color: #2f80d8">
+            <h3>oğan</h3>
+            <a href="./raw-data/ogan/ogan_1.txt">ogan_1.txt</a>
+            <a href="./raw-data/ogan/ogan_2.txt">ogan_2.txt</a>
+            <a href="./raw-data/ogan/ogan_3.txt">ogan_3.txt</a>
+            <a href="./raw-data/ogan/ogan_4.txt">ogan_4.txt</a>
+            <a href="./raw-data/ogan/ogan_5.txt">ogan_5.txt</a>
+          </article>
+          <article style="--candidate-color: #e30613">
+            <h3>kılıçdaroğlu</h3>
+            <a href="./raw-data/kilicdaroglu/kilicdaroglu_1.txt">kilicdaroglu_1.txt</a>
+            <a href="./raw-data/kilicdaroglu/kilicdaroglu_2.txt">kilicdaroglu_2.txt</a>
+            <a href="./raw-data/kilicdaroglu/kilicdaroglu_3.txt">kilicdaroglu_3.txt</a>
+            <a href="./raw-data/kilicdaroglu/kilicdaroglu_4.txt">kilicdaroglu_4.txt</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="method" id="yontem">
+        <p class="eyebrow" data-i18n="method.eyebrow">yöntem notu</p>
+        <h2 data-i18n="method.title">ne ölçüldü?</h2>
+        <div class="method-grid">
+          <p data-i18n="method.one">konuşmacı etiketi satırları yakalandı ve yalnızca hedef aday blokları çıkarıldı.</p>
+          <p data-i18n="method.two">türkçe karakterler korundu; apostrof ve seçili siyasi terim varyantları normalize edildi.</p>
+          <p data-i18n="method.three">“ve”, “da”, “de”, “ama” gibi işlev kelimeleri çıkarıldı; zamirler çıkarılmadı.</p>
+          <p data-i18n="method.four">“cumhurbaşkanı” ile “cumhurbaşkanlığı” otomatik birleştirilmedi.</p>
+        </div>
+        <p class="credits">
+          <a href="https://www.flaticon.com/free-icons/open-book" title="open book icons">icons created by juicy_fish - flaticon</a>
+        </p>
+      </section>
+    </main>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

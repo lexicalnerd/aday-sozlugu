@@ -1,0 +1,14 @@
+politician,input_file,parsed_turns,target_turns,cleaned_tokens,analysis_tokens
+erdogan,corpus/raw/erdogan/erdogan_1.txt,79,30,3547,2435
+erdogan,corpus/raw/erdogan/erdogan_2.txt,77,21,4722,3436
+erdogan,corpus/raw/erdogan/erdogan_3.txt,1,1,598,475
+erdogan,corpus/raw/erdogan/erdogan_4.txt,1,1,2013,1563
+ogan,corpus/raw/ogan/ogan_1.txt,2,1,1009,827
+ogan,corpus/raw/ogan/ogan_2.txt,53,26,3557,2622
+ogan,corpus/raw/ogan/ogan_3.txt,218,109,5706,4192
+ogan,corpus/raw/ogan/ogan_4.txt,114,56,6304,4633
+ogan,corpus/raw/ogan/ogan_5.txt,0,1,1990,1610
+kilicdaroglu,corpus/raw/kilicdaroglu/kilicdaroglu_1.txt,75,30,4121,3160
+kilicdaroglu,corpus/raw/kilicdaroglu/kilicdaroglu_2.txt,45,21,2775,2003
+kilicdaroglu,corpus/raw/kilicdaroglu/kilicdaroglu_3.txt,1,1,232,184
+kilicdaroglu,corpus/raw/kilicdaroglu/kilicdaroglu_4.txt,333,165,7619,5624
