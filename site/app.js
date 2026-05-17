@@ -84,6 +84,7 @@ const copy = {
       "türkçe karakterler korundu; apostrof ve seçili siyasi terim varyantları normalize edildi.",
     "method.three": "“ve”, “da”, “de”, “ama” gibi işlev kelimeleri çıkarıldı; zamirler çıkarılmadı.",
     "method.four": "“cumhurbaşkanı” ile “cumhurbaşkanlığı” otomatik birleştirilmedi.",
+    "credits.images": "görsel kredileri",
     files: "dosya",
     targetTurns: "hedef konuşma bloğu",
     cleanedTokens: "temiz token",
@@ -175,6 +176,7 @@ const copy = {
     "method.two": "turkish characters were preserved; apostrophes and selected political term variants were normalized.",
     "method.three": "function words such as “ve”, “da”, “de”, and “ama” were removed; pronouns were not removed.",
     "method.four": "“cumhurbaşkanı” and “cumhurbaşkanlığı” were not automatically merged.",
+    "credits.images": "image credits",
     files: "files",
     targetTurns: "target turns",
     cleanedTokens: "clean tokens",
@@ -330,6 +332,11 @@ const state = {
 
 const bySlug = new Map(data.candidates.map((candidate) => [candidate.slug, candidate]));
 const revealedElements = new WeakSet();
+const candidateImages = {
+  erdogan: "./assets/erdogan.jpg",
+  ogan: "./assets/ogan.jpg",
+  kilicdaroglu: "./assets/kilicdaroglu.jpg",
+};
 
 function fmt(value) {
   return Number(value).toLocaleString(state.lang === "tr" ? "tr-TR" : "en-US");
@@ -393,6 +400,9 @@ function renderMetricCards() {
     .map(
       (candidate) => `
         <article class="metric-card" style="--candidate-color: ${candidate.color}">
+          <div class="metric-portrait">
+            <img src="${candidateImages[candidate.slug]}" alt="${candidateName(candidate)}" />
+          </div>
           <h3><span class="dot"></span>${candidateName(candidate)}</h3>
           <div class="stat"><span>${tr("files")}</span><strong>${fmt(candidate.files)}</strong></div>
           <div class="stat"><span>${tr("targetTurns")}</span><strong>${fmt(candidate.targetTurns)}</strong></div>
@@ -413,6 +423,7 @@ function renderCandidateTabs() {
           style="--candidate-color: ${candidate.color}"
           type="button"
           data-candidate="${candidate.slug}">
+          <img class="tab-photo" src="${candidateImages[candidate.slug]}" alt="" aria-hidden="true" />
           <span class="dot"></span>${candidateName(candidate)}
         </button>
       `

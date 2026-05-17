@@ -171,6 +171,16 @@ a {
   animation: scale-in 620ms 160ms ease both;
 }
 
+.metric-portrait::after {
+  position: absolute;
+  inset: 0;
+  background: var(--candidate-color);
+  content: "";
+  mix-blend-mode: color;
+  opacity: 0.48;
+  pointer-events: none;
+}
+
 .kicker,
 .eyebrow {
   margin: 0 0 14px;
@@ -424,6 +434,39 @@ main {
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
+.candidate-photo-wrap {
+  position: relative;
+  margin-bottom: 18px;
+  overflow: hidden;
+  border-bottom: 4px solid var(--candidate-color);
+  background: var(--candidate-color);
+}
+
+.candidate-photo-wrap::after {
+  position: absolute;
+  inset: 0;
+  background: var(--candidate-color);
+  content: "";
+  mix-blend-mode: color;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.candidate-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(55%) contrast(1.12);
+  transition: filter 220ms ease, transform 220ms ease;
+}
+
+.finding-grid article:hover .candidate-photo {
+  filter: grayscale(28%) contrast(1.08);
+  transform: scale(1.025);
+}
+
 .finding-grid article:hover,
 .metric-card:hover,
 .cluster-card:hover,
@@ -571,6 +614,30 @@ main {
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
+.metric-portrait {
+  position: relative;
+  height: 130px;
+  margin: -16px -16px 24px;
+  overflow: hidden;
+  border-bottom: 4px solid var(--candidate-color);
+  background: var(--candidate-color);
+}
+
+.metric-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  filter: grayscale(58%) contrast(1.12);
+  transition: filter 220ms ease, transform 220ms ease;
+}
+
+.metric-card:hover .metric-portrait img {
+  filter: grayscale(30%) contrast(1.08);
+  transform: scale(1.025);
+}
+
 .metric-card h3 {
   display: flex;
   gap: 10px;
@@ -654,6 +721,17 @@ select {
   align-items: center;
   padding: 11px 15px;
   font-weight: 800;
+}
+
+.tab-photo {
+  width: 26px;
+  height: 26px;
+  margin-left: -5px;
+  border: 1px solid rgba(18, 20, 23, 0.18);
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(45%) contrast(1.08);
 }
 
 .segmented button.active,
@@ -925,6 +1003,48 @@ select {
   text-underline-offset: 3px;
 }
 
+.image-credits {
+  max-width: 900px;
+  margin: 22px auto 0;
+  color: rgba(255, 253, 248, 0.56);
+}
+
+.image-credits p {
+  margin: 0 0 8px;
+  color: rgba(255, 253, 248, 0.72);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.image-credits ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.image-credits li {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.image-credits strong {
+  color: rgba(255, 253, 248, 0.84);
+}
+
+.image-credits a {
+  color: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 @media (max-width: 900px) {
   :root {
     --page-pad: 40px;
@@ -1105,6 +1225,10 @@ select {
     padding: 18px;
   }
 
+  .candidate-photo {
+    aspect-ratio: 16 / 10;
+  }
+
   .metrics {
     margin-bottom: 28px;
     border-left: 0;
@@ -1113,6 +1237,11 @@ select {
 
   .metric-card {
     min-height: auto;
+  }
+
+  .metric-portrait {
+    height: 150px;
+    margin: -6px -6px 18px;
   }
 
   .graphic-head {
@@ -1227,6 +1356,12 @@ select {
   }
 
   .method .credits {
+    font-size: 10px;
+  }
+
+  .image-credits li {
+    grid-template-columns: 1fr;
+    gap: 3px;
     font-size: 10px;
   }
 }
