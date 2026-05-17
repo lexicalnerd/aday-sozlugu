@@ -8,7 +8,7 @@
   --erdogan: #f6b21a;
   --ogan: #2f80d8;
   --kilicdaroglu: #e30613;
-  font-family: Avenir, "Avenir Next", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Finlandica Headline", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * {
@@ -112,10 +112,15 @@ a {
   transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
-.topbar a:hover {
+.topbar a:hover,
+.topbar a.active {
   background: var(--ink);
   color: var(--white);
   transform: translateY(-1px);
+}
+
+.topbar a.active {
+  box-shadow: 0 8px 22px rgba(18, 20, 23, 0.12);
 }
 
 .language-toggle {

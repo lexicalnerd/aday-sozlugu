@@ -690,6 +690,38 @@ function initScrollReveals() {
   });
 }
 
+function initNavSpy() {
+  const navLinks = [...document.querySelectorAll(".topbar a[href^='#']")];
+  const sections = navLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+
+  function setActive(id) {
+    navLinks.forEach((link) => {
+      link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+    });
+  }
+
+  function updateActiveSection() {
+    const checkpoint = window.scrollY + window.innerHeight * 0.34;
+    const current = sections.reduce((active, section) => {
+      return section.offsetTop <= checkpoint ? section : active;
+    }, sections[0]);
+    if (current) setActive(current.id);
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const id = link.getAttribute("href").slice(1);
+      setActive(id);
+    });
+  });
+
+  window.addEventListener("scroll", updateActiveSection, { passive: true });
+  window.addEventListener("resize", updateActiveSection);
+  updateActiveSection();
+}
+
 function renderAll() {
   renderStaticText();
   renderMetricCards();
@@ -712,3 +744,4 @@ document.querySelectorAll("[data-lang]").forEach((button) => {
 });
 
 renderAll();
+initNavSpy();
