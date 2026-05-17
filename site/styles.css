@@ -19,6 +19,64 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes topbar-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes word-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -44%) scale(0.86);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
 body {
   margin: 0;
   background: var(--paper);
@@ -43,6 +101,7 @@ a {
   background: rgba(255, 253, 248, 0.82);
   backdrop-filter: blur(14px);
   transform: translateX(-50%);
+  animation: topbar-in 520ms ease both;
 }
 
 .topbar a {
@@ -50,11 +109,13 @@ a {
   border-radius: 999px;
   color: var(--muted);
   font-size: 14px;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .topbar a:hover {
   background: var(--ink);
   color: var(--white);
+  transform: translateY(-1px);
 }
 
 .language-toggle {
@@ -74,12 +135,14 @@ a {
   cursor: pointer;
   font-size: 13px;
   font-weight: 800;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .language-toggle button.active,
 .language-toggle button:hover {
   background: var(--ink);
   color: var(--white);
+  transform: translateY(-1px);
 }
 
 .hero {
@@ -97,6 +160,7 @@ a {
   max-width: 760px;
   margin: 0 auto;
   text-align: center;
+  animation: fade-up 700ms 80ms ease both;
 }
 
 .hero-icon {
@@ -104,6 +168,7 @@ a {
   height: 48px;
   margin-bottom: 18px;
   opacity: 0.82;
+  animation: scale-in 620ms 160ms ease both;
 }
 
 .kicker,
@@ -158,6 +223,7 @@ h2 {
   padding: 22px 28px 0;
   border: 1px solid var(--line);
   background: rgba(255, 253, 248, 0.42);
+  animation: fade-up 760ms 220ms ease both;
 }
 
 .word-orbit,
@@ -227,7 +293,9 @@ h2 {
   font-weight: 900;
   line-height: 1;
   transform: translate(-50%, -50%);
-  transition: transform 220ms ease, opacity 220ms ease;
+  animation: word-pop 520ms ease both;
+  animation-delay: var(--word-delay, 0ms);
+  transition: transform 220ms ease, opacity 220ms ease, filter 220ms ease;
 }
 
 .floating-word small {
@@ -239,7 +307,19 @@ h2 {
 }
 
 .floating-word:hover {
+  filter: saturate(1.18);
   transform: translate(-50%, -50%) scale(1.08);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 main {
@@ -282,6 +362,12 @@ main {
   border-top: 2px solid var(--ink);
   border-bottom: 1px solid var(--line);
   background: var(--white);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.act-card:hover {
+  box-shadow: 0 18px 45px rgba(18, 20, 23, 0.08);
+  transform: translateY(-3px);
 }
 
 .act-card > img {
@@ -335,6 +421,16 @@ main {
   padding: 22px;
   border-top: 8px solid var(--candidate-color);
   background: var(--white);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.finding-grid article:hover,
+.metric-card:hover,
+.cluster-card:hover,
+.phrase-card:hover,
+.raw-data-grid article:hover {
+  box-shadow: 0 18px 45px rgba(18, 20, 23, 0.08);
+  transform: translateY(-3px);
 }
 
 .finding-grid h3 {
@@ -395,6 +491,12 @@ main {
   border-top: 2px solid var(--ink);
   border-bottom: 1px solid var(--line);
   background: var(--white);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.conclusion:hover {
+  box-shadow: 0 18px 45px rgba(18, 20, 23, 0.08);
+  transform: translateY(-3px);
 }
 
 .raw-data {
@@ -416,6 +518,7 @@ main {
   padding: 18px;
   border-top: 8px solid var(--candidate-color);
   background: var(--white);
+  transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
 .raw-data-grid h3 {
@@ -435,6 +538,12 @@ main {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
+  transition: color 180ms ease, padding-left 180ms ease;
+}
+
+.raw-data-grid a:hover {
+  color: var(--candidate-color);
+  padding-left: 6px;
 }
 
 .raw-data-grid a::after {
@@ -459,6 +568,7 @@ main {
   min-height: 260px;
   padding: 38px;
   background: var(--white);
+  transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
 .metric-card h3 {
@@ -474,6 +584,13 @@ main {
   height: 13px;
   border-radius: 999px;
   background: var(--candidate-color);
+  transition: transform 180ms ease;
+}
+
+button:hover .dot,
+.metric-card:hover .dot,
+.phrase-card:hover .dot {
+  transform: scale(1.18);
 }
 
 .stat {
@@ -528,6 +645,7 @@ select {
   background: var(--white);
   color: var(--ink);
   cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
 .segmented button {
@@ -542,6 +660,12 @@ select {
 .toolbar button.active {
   background: var(--ink);
   color: var(--white);
+}
+
+.segmented button:hover,
+.toolbar button:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
 }
 
 .panel {
@@ -603,6 +727,8 @@ select {
   height: 100%;
   min-width: 2px;
   background: var(--candidate-color);
+  transform-origin: left center;
+  animation: bar-grow 680ms ease both;
 }
 
 .identity-row strong {
@@ -660,6 +786,7 @@ select {
   padding: 18px;
   border-top: 8px solid var(--candidate-color);
   background: var(--white);
+  transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
 .cluster-card h3 {
@@ -673,7 +800,14 @@ select {
   gap: 12px;
   padding: 10px 0;
   border-top: 1px solid var(--line);
+  cursor: pointer;
   font-size: 15px;
+  transition: color 180ms ease, padding-left 180ms ease;
+}
+
+.cluster-item:hover {
+  color: var(--candidate-color);
+  padding-left: 6px;
 }
 
 .cluster-item span:first-child {
@@ -711,6 +845,7 @@ select {
 .phrase-card {
   padding: 18px;
   background: var(--white);
+  transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
 .phrase-card h3 {
@@ -724,7 +859,14 @@ select {
   gap: 16px;
   padding: 9px 0;
   border-top: 1px solid var(--line);
+  cursor: pointer;
   font-size: 14px;
+  transition: color 180ms ease, padding-left 180ms ease;
+}
+
+.phrase-pill:hover {
+  color: var(--candidate-color);
+  padding-left: 6px;
 }
 
 .phrase-pill small {
@@ -1039,6 +1181,8 @@ select {
     background: var(--white);
     font-size: 15px;
     font-weight: 900;
+    animation: fade-up 420ms ease both;
+    animation-delay: var(--row-delay, 0ms);
   }
 
   .word-list-row::before {
@@ -1084,5 +1228,21 @@ select {
 
   .method .credits {
     font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }

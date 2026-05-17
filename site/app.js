@@ -329,6 +329,7 @@ const state = {
 };
 
 const bySlug = new Map(data.candidates.map((candidate) => [candidate.slug, candidate]));
+const revealedElements = new WeakSet();
 
 function fmt(value) {
   return Number(value).toLocaleString(state.lang === "tr" ? "tr-TR" : "en-US");
@@ -461,7 +462,7 @@ function renderWords(container, words, candidate, maxWords = 24) {
     container.innerHTML = chosen
       .map(
         (word, index) => `
-          <div class="word-list-row" style="--candidate-color: ${candidate.color}; --bar-width: ${(Number(word.count) / max) * 100}%">
+          <div class="word-list-row" style="--candidate-color: ${candidate.color}; --bar-width: ${(Number(word.count) / max) * 100}%; --row-delay: ${index * 34}ms">
             <span class="rank">${index + 1}</span>
             <span class="word">${word.word}</span>
             <span class="count">${word.count}</span>
@@ -480,7 +481,7 @@ function renderWords(container, words, candidate, maxWords = 24) {
       return `
         <span class="floating-word"
           title="${word.word}: ${word.count}"
-          style="--word-color: ${candidate.color}; --mobile-word-size: ${mobileSize}px; left: ${left}%; top: ${top}%; font-size: ${size}px;">
+          style="--word-color: ${candidate.color}; --mobile-word-size: ${mobileSize}px; --word-delay: ${index * 32}ms; left: ${left}%; top: ${top}%; font-size: ${size}px;">
           ${tokenMarkup(word.word, word.translation)}
         </span>
       `;
@@ -503,7 +504,7 @@ function renderHeroOrbit() {
       return `
         <span class="floating-word"
           title="${candidateName(word.candidate)}: ${word.word} (${word.count})"
-          style="--word-color: ${word.candidate.color}; left: ${left}%; top: ${top}%; font-size: ${size}px;">
+          style="--word-color: ${word.candidate.color}; --word-delay: ${index * 36}ms; left: ${left}%; top: ${top}%; font-size: ${size}px;">
           ${tokenMarkup(word.word, word.translation)}
         </span>
       `;
@@ -634,6 +635,50 @@ function renderPhrases() {
     .join("");
 }
 
+function initScrollReveals() {
+  const elements = document.querySelectorAll(`
+    .section,
+    .act-card,
+    .findings,
+    .finding-grid article,
+    .metrics,
+    .metric-card,
+    .story-block,
+    .panel,
+    .identity-tool,
+    .section-insight,
+    .phrases,
+    .phrase-card,
+    .conclusion,
+    .raw-data,
+    .raw-data-grid article,
+    .method
+  `);
+
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach((element) => element.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  elements.forEach((element) => {
+    if (revealedElements.has(element)) return;
+    revealedElements.add(element);
+    element.classList.add("reveal");
+    observer.observe(element);
+  });
+}
+
 function renderAll() {
   renderStaticText();
   renderMetricCards();
@@ -645,6 +690,7 @@ function renderAll() {
   renderAnchorSelect();
   renderClusters();
   renderPhrases();
+  initScrollReveals();
 }
 
 document.querySelectorAll("[data-lang]").forEach((button) => {
